@@ -54,6 +54,7 @@ class Users(AbstractUser):
         related_name="custom_user_permissions_set",
         blank=True,
     )
+    is_active = True
 
     class Meta:
         verbose_name = "Пользователь"
