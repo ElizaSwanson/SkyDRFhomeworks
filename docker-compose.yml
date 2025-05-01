@@ -28,14 +28,14 @@ services:
       - web
 
   db:
-    image: postgres:16
+    image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data
     env_file:
       - ./.env
 
   redis:
-    image: "redis:latest"
+    image: redis:latest
     ports:
       - "6379:6379"
     volumes:
