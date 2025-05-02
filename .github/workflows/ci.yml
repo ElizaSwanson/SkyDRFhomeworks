@@ -2,6 +2,38 @@ name: Django CI
 
 on: [ push ]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-in-project: true
+
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            .venv
+            ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-lint-${{ hashFiles('pyproject.toml', 'poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-lint-
+
+      - name: Install lint dependencies
+        run: poetry install --only linter --no-interaction --no-root
+
+      - name: Run flake8
+        run: poetry run flake8 .
+
   test:
     runs-on: ubuntu-latest
 
