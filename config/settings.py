@@ -70,7 +70,7 @@ DATABASES = {
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": os.getenv("HOST"),
         "PORT": os.getenv("PORT"),
-}
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -112,11 +112,11 @@ CACHE_ENABLED = True
 
 if CACHE_ENABLED:
     CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://redis:6379/1',
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': 'redis://redis:6379/1',
+        }
     }
-}
 
 AUTH_USER_MODEL = "users.Users"
 
